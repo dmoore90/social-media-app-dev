@@ -30,7 +30,8 @@ class Profile extends Component {
 				</div>
 				<div>
 					<li style={{ listStyleType: "none" }}><Link to={'./logout'}><button>Logout</button></Link></li>
-				</div>
+					<li style={{ listStyleType: "none" }}><Link to={'./createPost'}><button>Create Post</button></Link</li>
+				</div>	
 
 			</div>
 		);

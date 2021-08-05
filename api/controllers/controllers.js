@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Post = require('../models/Post');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authenticateJWT = require('../security/authenticateJWT');
@@ -65,4 +66,29 @@ exports.postLogout = (req, res) => {
 
 exports.getProfile = (req, res) => {
 	return res.status(200);
+}
+
+exports.createPost = (req, res) => {
+	Post.create({
+		title: req.body.title,
+		content: req.body.content
+	})
+	.then(action => {
+		return res.sendStatus(200);
+	})
+	.catch(err => {
+		console.log(err);
+		return res.sendStatus(404);
+	})
+}
+
+exports.getPosts = (req, res) => {
+	Post.findAll()
+	.then(posts => {
+		res.status(200).json();
+	})
+	.catch(err => {
+		console.log(err);
+		return res.sendStatus(404);
+	})
 }

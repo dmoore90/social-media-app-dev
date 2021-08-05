@@ -11,6 +11,10 @@ const Post = connection.define("posts", {
 	title: {
 		type: Sequelize.STRING(45),
 		allowNull: false
+	},
+	content: {
+		type: Sequelize.STRING(300),
+		allowNull: false
 	}
 })
 
