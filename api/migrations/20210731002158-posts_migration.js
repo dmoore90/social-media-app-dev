@@ -16,6 +16,10 @@ module.exports = {
         content: {
           type: Sequelize.STRING(300),
           allowNull: false
+        },
+        user_id: {
+          type: Sequelize.INTEGER(11),
+          allowNull: false
         }
       });
   },

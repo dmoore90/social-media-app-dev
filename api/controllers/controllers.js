@@ -77,9 +77,11 @@ exports.getProfile = (req, res) => {
 }
 
 exports.createPost = (req, res) => {
+	console.log(req.user.id);
 	Post.create({
 		title: req.body.title,
-		content: req.body.content
+		content: req.body.content,
+		user_id: req.user.id
 	})
 	.then(action => {
 		return res.sendStatus(200);

@@ -18,7 +18,7 @@ class App extends Component {
 					<Route path="/login" component={Login} />
 					<Route path="/profile" component={Profile} />
 					<Route path="/logout" component={Logout} />
-					<Route path="/create_post" component={CreatePost} />
+					<Route path="/createPost" component={CreatePost} />
 				</Switch>
 			</div>
 		)
