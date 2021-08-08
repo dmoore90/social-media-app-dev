@@ -66,7 +66,7 @@ exports.postLogout = (req, res) => {
 
 exports.getProfile = (req, res) => {
 	const username = req.user.username;
-	Post.findAll()
+	Post.findAll({ where: { user_id: req.user.id }})
 	.then(posts => {
 		return res.status(200).json({posts: posts, username: username});
 	})
