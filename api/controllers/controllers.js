@@ -65,7 +65,15 @@ exports.postLogout = (req, res) => {
 }
 
 exports.getProfile = (req, res) => {
-	return res.status(200);
+	const username = req.user.username;
+	Post.findAll()
+	.then(posts => {
+		return res.status(200).json({posts: posts, username: username});
+	})
+	.catch(err => {
+		console.log(err);
+		return res.sendStatus(404);
+	})
 }
 
 exports.createPost = (req, res) => {
@@ -75,17 +83,6 @@ exports.createPost = (req, res) => {
 	})
 	.then(action => {
 		return res.sendStatus(200);
-	})
-	.catch(err => {
-		console.log(err);
-		return res.sendStatus(404);
-	})
-}
-
-exports.getPosts = (req, res) => {
-	Post.findAll()
-	.then(posts => {
-		res.status(200).json();
 	})
 	.catch(err => {
 		console.log(err);

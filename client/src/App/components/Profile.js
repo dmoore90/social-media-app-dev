@@ -6,7 +6,8 @@ class Profile extends Component {
 	constructor() {
 		super();
 		this.state = {
-			list: []
+			posts: [],
+			username: ''
 		}
 	}
 
@@ -19,7 +20,9 @@ class Profile extends Component {
 				return this.props.history.push('/')
 			}
 		})
-		.then(list => this.setState({ list }))
+		.then(data => { 
+			this.setState({posts: data.posts, username: data.username});
+		})
 	}
 
 	render() {
@@ -27,12 +30,19 @@ class Profile extends Component {
 			<div>
 				<div>
 					<h1>Profile</h1>
+					<h1>Welcome, { this.state.username }</h1>
 				</div>
 				<div>
 					<li style={{ listStyleType: "none" }}><Link to={'./logout'}><button>Logout</button></Link></li>
-					<li style={{ listStyleType: "none" }}><Link to={'./createPost'}><button>Create Post</button></Link</li>
+					<li style={{ listStyleType: "none" }}><Link to={'./createPost'}><button>Create Post</button></Link></li>
 				</div>	
-
+				<div>
+				{this.state.posts.map(p => 
+					<ul key={p.id}>
+						<li>{p.title}</li>
+						<li>{p.content}</li>
+					</ul> )}
+				</div>
 			</div>
 		);
 	}
