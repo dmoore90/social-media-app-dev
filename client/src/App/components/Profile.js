@@ -39,8 +39,8 @@ class Profile extends Component {
 				<div>
 				{this.state.posts.map(p => 
 					<ul key={p.id}>
-						<li>{p.title}</li>
-						<li>{p.content}</li>
+						<li style={{ listStyleType: "none" }}><Link to={`./updatePost/${p.id}`}><h2>{p.title}</h2></Link></li>
+						<li style={{ listStyleType: "none" }}>{p.content}</li>
 					</ul> )}
 				</div>
 			</div>

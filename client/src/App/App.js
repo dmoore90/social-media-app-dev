@@ -7,6 +7,7 @@ import Login from './components/Login.js';
 import Profile from './components/Profile.js';
 import Logout from './components/Logout.js';
 import CreatePost from './components/CreatePost.js';
+import UpdatePost from './components/UpdatePost.js';
 
 class App extends Component {
 	render() {
@@ -19,6 +20,7 @@ class App extends Component {
 					<Route path="/profile" component={Profile} />
 					<Route path="/logout" component={Logout} />
 					<Route path="/createPost" component={CreatePost} />
+					<Route path="/updatePost/:id" component={UpdatePost} />
 				</Switch>
 			</div>
 		)

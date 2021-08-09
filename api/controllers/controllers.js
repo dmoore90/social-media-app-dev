@@ -72,12 +72,11 @@ exports.getProfile = (req, res) => {
 	})
 	.catch(err => {
 		console.log(err);
-		return res.sendStatus(404);
+		return res.sendStatus(500);
 	})
 }
 
 exports.createPost = (req, res) => {
-	console.log(req.user.id);
 	Post.create({
 		title: req.body.title,
 		content: req.body.content,
@@ -88,6 +87,44 @@ exports.createPost = (req, res) => {
 	})
 	.catch(err => {
 		console.log(err);
-		return res.sendStatus(404);
+		return res.sendStatus(500);
+	})
+}
+
+exports.getPost = (req, res) => {
+	Post.findByPk(req.params.id)
+	.then(post => {
+		return res.json(post);
+	})
+	.catch(err => {
+		console.log(err);
+		return res.sendStatus(500);
+	})
+}
+
+exports.postUpdate = (req, res) => {
+	Post.findByPk(req.body.id)
+	.then(post => {
+		post.title = req.body.title;
+		post.content = req.body.content;
+		return post.save();
+	})
+	.then(action => {
+		return res.sendStatus(200);
+	})
+	.catch(err => {
+		console.log(err);
+		return res.sendStatus(500);
+	})
+}
+
+exports.deletePost = (req, res) => {
+	Post.destroy({ where: { id: req.body.id } })
+	.then(action => {
+		return res.sendStatus(200);
+	})
+	.catch(err => {
+		console.log(err);
+		return res.sendStatus(500);
 	})
 }
