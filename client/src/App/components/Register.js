@@ -42,24 +42,24 @@ class Register extends Component {
 
 	render() {
 		return (
-			<div>
-				<div>
-					<h1>Register</h1>	
+			<div className="wrapper">
+				<div class="title">
+					<div>Register</div>	
 				</div>
 				<div>
 			      <form onSubmit={this.handleSubmit}>
 			    	<label>first name:</label>
-			    	<li><input type="text" name="first_name" value={this.state.first_name} onChange={this.handleChange} /></li>
+			    	<div><input type="text" name="first_name" value={this.state.first_name} onChange={this.handleChange} /></div>
 			    	<label>last_name:</label> 
-			    	<li><input type="text" name="last_name" value={this.state.last_name} onChange={this.handleChange} /></li>
+			    	<div><input type="text" name="last_name" value={this.state.last_name} onChange={this.handleChange} /></div>
 			    	<label>email:</label>
-			    	<li><input type="text" name="email" value={this.state.email} onChange={this.handleChange} /></li>
+			    	<div><input type="text" name="email" value={this.state.email} onChange={this.handleChange} /></div>
 			    	<label>username:</label>
-			    	<li><input type="text" name="username" value={this.state.username} onChange={this.handleChange} /></li>
+			    	<div><input type="text" name="username" value={this.state.username} onChange={this.handleChange} /></div>
 			        <label>password:</label>
-			        <li><input type="text" name="password" value={this.state.password} onChange={this.handleChange} /></li>
+			        <div><input type="text" name="password" value={this.state.password} onChange={this.handleChange} /></div>
 			        <label>password confirmation:</label>
-			        <li><input type="text" name="pass_confirmation" value={this.state.pass_confirmation} onChange={this.handleChange} /></li>
+			        <div><input type="text" name="pass_confirmation" value={this.state.pass_confirmation} onChange={this.handleChange} /></div>
 			        <input type="submit" value="Submit" />
 			      </form>
 				</div>

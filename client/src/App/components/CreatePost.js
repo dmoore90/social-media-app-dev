@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import '../../static/styles.css'
 
 class CreatePost extends Component {
 	constructor(props) {
@@ -43,16 +44,18 @@ class CreatePost extends Component {
 
 	render() {
 		return (
-			<div>
-				<div>
-					<h1>Create Post</h1>
+			<div className="wrapper">
+				
+				<div className="title">
+					<div>Create Post</div>
 				</div>
-				<div>
+
+				<div className="list-container">
 					<form onSubmit={this.handleSubmit}>
 						<label>title:</label>
-						<li><input type="text" name="title" value={this.state.title} onChange={this.handleChange} /></li>
+						<div><input type="text" name="title" value={this.state.title} onChange={this.handleChange} /></div>
 						<label>content:</label>
-						<li><input type="text" name="content" value={this.state.content} onChange={this.handleChange} /></li>
+						<div><input type="text" name="content" value={this.state.content} onChange={this.handleChange} /></div>
 						<input type="submit" value="submit"/>
 					</form>
 				</div>

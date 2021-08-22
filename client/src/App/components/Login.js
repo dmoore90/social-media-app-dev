@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../static/styles.css'
 
 class Login extends Component {
 	constructor(props) {
@@ -41,19 +42,22 @@ class Login extends Component {
 
 	render() {
 		return (
-			<div>
-				<div>
-					<h1>Login</h1>
+			<div className="wrapper">
+
+				<div className="title">
+					<div>Login</div>
 				</div>
-				<div>
+			
+				<div class="list-container">
 					<form onSubmit={this.handleSubmit}>
 				    	<label>username:</label>
-				    	<li><input type="text" name="username" value={this.state.username} onChange={this.handleChange} /></li>
+				    	<div><input type="text" name="username" value={this.state.username} onChange={this.handleChange} /></div>
 				    	<label>password</label>
-				    	<li><input type="text" name="password" value={this.state.password} onChange={this.handleChange} /></li>
+				    	<div><input type="text" name="password" value={this.state.password} onChange={this.handleChange} /></div>
 				    	<input type="submit" value="submit" />
 					</form>
 				</div>
+			
 			</div>					
 		)
 	}

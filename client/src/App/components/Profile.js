@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import '../../static/styles.css'
 
 class Profile extends Component {
 	constructor() {
 		super();
 		this.state = {
 			posts: [],
-			username: ''
+			username: '',
+			first_name: '',
+			last_name: ''
 		}
 	}
 
@@ -21,28 +23,39 @@ class Profile extends Component {
 			}
 		})
 		.then(data => { 
-			this.setState({posts: data.posts, username: data.username});
+			this.setState({
+				posts: data.posts, 
+				username: data.username, 
+				first_name: data.first_name,
+				last_name: data.last_name
+			});
+			console.log(this.state);
 		})
 	}
 
 	render() {
 		return (
-			<div>
-				<div>
-					<h1>Profile</h1>
-					<h1>Welcome, { this.state.username }</h1>
+			<div className="wrapper">
+				
+				<div className="title">
+					<div>{ this.state.first_name + " " + this.state.last_name}</div>
 				</div>
-				<div>
-					<li style={{ listStyleType: "none" }}><Link to={'./logout'}><button>Logout</button></Link></li>
-					<li style={{ listStyleType: "none" }}><Link to={'./createPost'}><button>Create Post</button></Link></li>
+
+				<div className="nav">
+					<div><Link to={'./logout'}><button>Logout</button></Link></div>
+					<div><Link to={'./createPost'}><button>Create Post</button></Link></div>
 				</div>	
-				<div>
-				{this.state.posts.map(p => 
-					<ul key={p.id}>
-						<li style={{ listStyleType: "none" }}><Link to={`./updatePost/${p.id}`}><h2>{p.title}</h2></Link></li>
-						<li style={{ listStyleType: "none" }}>{p.content}</li>
-					</ul> )}
+				
+				<div className="posts">
+					{this.state.posts.map(p => 
+						<div key={p.id}>
+							<Link to={`./updatePost/${p.id}`}><h2>{p.title}</h2></Link>
+							{p.content}
+						</div> 
+					)}
+				
 				</div>
+			
 			</div>
 		);
 	}

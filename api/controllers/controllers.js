@@ -46,7 +46,12 @@ exports.postLogin = (req, res) => {
 			bcrypt.compare(password, user.password)
 				.then(success => {
 					if (success) {
-			        	const token = jwt.sign({ id: user.dataValues.id, username: user.username }, JWT_KEY.secret, { expiresIn: "1h" });
+			        	const token = jwt.sign({ 
+			        		id: user.dataValues.id, 
+			        		username: user.username, 
+			        		first_name: user.dataValues.first_name,
+			        		last_name: user.dataValues.last_name 
+			        	}, JWT_KEY.secret, { expiresIn: "1h" });
 						res.cookie('auth', token, { httpOnly: true, secure: true, sameSite: true });
 						return res.sendStatus(200);
 					} else {
@@ -66,9 +71,15 @@ exports.postLogout = (req, res) => {
 
 exports.getProfile = (req, res) => {
 	const username = req.user.username;
+	console.log(req.user.first_name)
 	Post.findAll({ where: { user_id: req.user.id }})
 	.then(posts => {
-		return res.status(200).json({posts: posts, username: username});
+		return res.status(200).json({
+			posts: posts, 
+			username: req.user.username, 
+			first_name: req.user.first_name, 
+			last_name: req.user.last_name
+		});
 	})
 	.catch(err => {
 		console.log(err);
