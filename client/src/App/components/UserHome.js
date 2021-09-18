@@ -2,19 +2,18 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../../static/styles.css'
 
-class Profile extends Component {
+class UserHome extends Component {
 	constructor() {
 		super();
 		this.state = {
 			posts: [],
-			username: '',
-			first_name: '',
-			last_name: ''
+			current_user: []
+
 		}
 	}
 
 	componentDidMount() {
-		fetch('http://localhost:3000/profile', {credentials: 'include'})
+		fetch('http://localhost:3000/userHome', {credentials: 'include'})
 		.then(res => {
 			if (res.status === 200) {
 				return res.json()
@@ -22,13 +21,12 @@ class Profile extends Component {
 				return this.props.history.push('/')
 			}
 		})
-		.then(data => { 
+		.then(indata => { 
 			this.setState({
-				posts: data.posts, 
-				username: data.username, 
-				first_name: data.first_name,
-				last_name: data.last_name
+				posts: indata.posts,
+				current_user: indata.cuser
 			});
+			console.log(this.state)
 		})
 	}
 
@@ -37,23 +35,23 @@ class Profile extends Component {
 			<div className="wrapper">
 				
 				<div className="title">
-					<div>{ this.state.first_name + " " + this.state.last_name}</div>
+					<div>{ this.state.current_user.first_name + " " + this.state.current_user.last_name}</div>
 				</div>
 
 				<div className="nav">
 					<div><Link to={'./logout'}><button>Logout</button></Link></div>
 					<div><Link to={'./createPost'}><button>Create Post</button></Link></div>
-					<div><Link to={'./userHome'}><button>Home</button></Link></div>
 				</div>	
 				
 				<div className="posts">
 					{this.state.posts.map(p => 
 						<div key={p.id}>
 							<Link to={`./updatePost/${p.id}`}><h2>{p.title}</h2></Link>
-							{p.content}
+							<div>{p.content}</div>
+							<br />
+							<div>{p.user.first_name + " " + p.user.last_name}</div>
 						</div> 
 					)}
-				
 				</div>
 			
 			</div>
@@ -61,4 +59,4 @@ class Profile extends Component {
 	}
 }
 
-export default Profile;
+export default UserHome;

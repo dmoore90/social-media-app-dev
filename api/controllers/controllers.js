@@ -71,8 +71,7 @@ exports.postLogout = (req, res) => {
 
 exports.getProfile = (req, res) => {
 	const username = req.user.username;
-	console.log(req.user.first_name)
-	Post.findAll({ where: { user_id: req.user.id }})
+	Post.findAll({ where: { userId: req.user.id }})
 	.then(posts => {
 		return res.status(200).json({
 			posts: posts, 
@@ -91,7 +90,7 @@ exports.createPost = (req, res) => {
 	Post.create({
 		title: req.body.title,
 		content: req.body.content,
-		user_id: req.user.id
+		userId: req.user.id
 	})
 	.then(action => {
 		return res.sendStatus(200);
@@ -133,6 +132,25 @@ exports.deletePost = (req, res) => {
 	Post.destroy({ where: { id: req.body.id } })
 	.then(action => {
 		return res.sendStatus(200);
+	})
+	.catch(err => {
+		console.log(err);
+		return res.sendStatus(500);
+	})
+}
+
+exports.getUserHome = (req, res) => {
+	Post.findAll({
+		include: [{
+			model: User,
+			required: false
+		}]
+	})
+	.then(posts => {
+		return res.json({
+			posts: posts,
+			cuser: req.user
+		});
 	})
 	.catch(err => {
 		console.log(err);

@@ -12,5 +12,6 @@ router.post('/createPost', authenticateJWT, controllers.createPost);
 router.get('/getPost/:id', authenticateJWT, controllers.getPost);
 router.post('/postUpdate', authenticateJWT, controllers.postUpdate);
 router.post('/deletePost', authenticateJWT, controllers.deletePost);
+router.get('/userHome', authenticateJWT, controllers.getUserHome);
 
 module.exports = router;

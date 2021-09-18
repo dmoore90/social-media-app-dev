@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-      return queryInterface.createTable('posts', { 
+      return queryInterface.createTable('post', { 
         id: {
           type: Sequelize.INTEGER(11),
           allowNull: false,
@@ -17,14 +17,21 @@ module.exports = {
           type: Sequelize.STRING(300),
           allowNull: false
         },
-        user_id: {
+        userId: {
           type: Sequelize.INTEGER(11),
-          allowNull: false
+          allowNull: false,
+          references: {
+            model: 'user',
+            key: 'id'
+          }
         }
+      },
+      {
+        freezeTableName: true
       });
   },
 
   down: (queryInterface, Sequelize) => {
-      return queryInterface.dropTable('posts');
+      return queryInterface.dropTable('post');
   }
 };

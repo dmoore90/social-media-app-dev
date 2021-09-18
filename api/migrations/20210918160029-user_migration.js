@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-      return queryInterface.createTable('users', {
+      return queryInterface.createTable('user', {
         id: {
           type: Sequelize.INTEGER(11),
           allowNull: false,
@@ -33,10 +33,12 @@ module.exports = {
           type: Sequelize.STRING(12),
           defaultValue: "NOSUPERUSER"
         }  
+      }, {
+        freezeTableName: true
       });
   },
 
   down: (queryInterface, Sequelize) => {
-      return queryInterface.dropTable('users');
+      return queryInterface.dropTable('user');
   }
 };

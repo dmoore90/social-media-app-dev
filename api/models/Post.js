@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize');
 const connection = require('../db/connection_pool');
+const User = require('./User');
 
-const Post = connection.define("posts", {
+const Post = connection.define("post", {
 	id: {
 		type: Sequelize.INTEGER(11),
 		allowNull: false,
@@ -16,10 +17,16 @@ const Post = connection.define("posts", {
 		type: Sequelize.STRING(300),
 		allowNull: false
 	},
-    user_id: {
+  userId: {
       type: Sequelize.INTEGER(11),
       allowNull: false
     }
+}, {
+	freezeTableName: true
 })
+
+// Post.associate = (models) => {
+// 	Post.belongsTo(models.User, {foreignKey: 'id'})
+// }
 
 module.exports = Post;
